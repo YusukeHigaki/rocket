@@ -1,0 +1,20 @@
+#########ORIGINAL##########
+/vendor
+/node_modules
+.env
+
+##########GLOBAL###########
+# Global eclipse
+.buildpath
+.project
+.settings/*
+
+# Global
+*.swp
+*.swo
+*.swn
+tags
+
+# Global/OSX.gitignore
+.DS_Store
+._.DS_Store
