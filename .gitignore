@@ -8,6 +8,7 @@
 .buildpath
 .project
 .settings/*
+.idea
 
 # Global
 *.swp
