@@ -40,7 +40,7 @@ class RankingCommand extends Command {
 	 */
 	public function fire()
 	{
-        $ranking = $this->appstoreService->getRanking(10);
+        $ranking = $this->appstoreService->getRanking(100);
 
         $appList = [];
         foreach ($ranking as $app) {
