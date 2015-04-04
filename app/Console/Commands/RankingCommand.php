@@ -3,8 +3,12 @@
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use App\Services\AppstoreService;
-use App\Iphone;
+use App\Services\AppStoreService;
+use App\Services\GooglePlayService;
+use App\Services\AlexaService;
+use App\AppStore;
+use App\GooglePlay;
+use App\Alexa;
 
 class RankingCommand extends Command {
 
@@ -20,17 +24,19 @@ class RankingCommand extends Command {
 	 *
 	 * @var string
 	 */
-	protected $description = 'Update Appstore, Android market, and Alexa ranking';
+	protected $description = 'Update AppStore, Android market, and Alexa ranking';
 
 	/**
 	 * Create a new command instance.
 	 *
 	 * @return void
 	 */
-	public function __construct(AppstoreService $appstoreService)
+	public function __construct(AppStoreService $appStoreService, GooglePlayService $googlePlayService, AlexaService $alexaService)
 	{
 		parent::__construct();
-        $this->appstoreService = $appstoreService;
+        $this->appStoreService = $appStoreService;
+        $this->googlePlayService = $googlePlayService;
+        $this->alexaService = $alexaService;
 	}
 
     /**
@@ -40,17 +46,54 @@ class RankingCommand extends Command {
 	 */
 	public function fire()
 	{
-        $ranking = $this->appstoreService->getRanking(100);
+        $this->updateAppStoreRanking(100);
+        $this->updateGooglePlayRanking(60);
+        $this->updateAlexaRanking(500);
+    }
 
-        $appList = [];
+    private function updateAppStoreRanking($count)
+    {
+        $ranking = $this->appStoreService->getRanking($count);
+
+        $count = 0;
         foreach ($ranking as $app) {
-            $exist = Iphone::where('url', '=', $app->url)->first();
+            $exist = AppStore::where('url', '=', $app->url)->first();
             if ($exist) continue;
             $app->save();
-            $appList[] = $app;
+            $count++;
         }
 
-        $this->info(count($appList) . "件アップデートしました");
+        $this->info("AppStore : {$count}件アップデートしました");
+    }
+
+    private function updateGooglePlayRanking($count)
+    {
+        $ranking = $this->googlePlayService->getRanking($count);
+
+        $count = 0;
+        foreach ($ranking as $app) {
+            $exist = GooglePlay::where('icon', '=', $app->icon)->first();
+            if ($exist) continue;
+            $app->save();
+            $count++;
+        }
+
+        $this->info("GooglePlay : {$count}件アップデートしました");
+    }
+
+    private function updateAlexaRanking($count)
+    {
+        $ranking = $this->alexaService->getRanking($count);
+
+        $count = 0;
+        foreach ($ranking as $web) {
+            $exist = Alexa::where('url', '=', $web->url)->first();
+            if ($exist) continue;
+            $web->save();
+            $count++;
+        }
+
+        $this->info("Alexa : {$count}件アップデートしました");
     }
 
 	/**

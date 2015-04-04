@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Iphone extends Model {
+class AppStore extends Model {
 
-    protected $table = 'iphones';
+    protected $table = 'appstores';
 
     protected $fillable = ['ranking', 'name', 'icon', 'url'];
 

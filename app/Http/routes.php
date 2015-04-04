@@ -20,4 +20,17 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::get('appstore', 'RankingController@showAppstore');
+Route::get('appstore', [
+    'as'    => 'appstore',
+    'uses' => 'RankingController@showAppStore'
+]);
+
+Route::get('googleplay', [
+    'as'    => 'googleplay',
+    'uses' => 'RankingController@showGooglePlay'
+]);
+
+Route::get('alexa', [
+    'as'    => 'alexa',
+    'uses' => 'RankingController@showAlexa'
+]);

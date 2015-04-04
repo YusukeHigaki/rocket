@@ -3,10 +3,7 @@
 <head>
 <meta charset="UTF-8">
     <link href="/css/app.css" rel="stylesheet">
-
-    <style type="text/css">
-    body { padding-top: 70px; }
-</style>
+    <link href="/css/style.css" rel="stylesheet">
 <title>Ranking</title>
 </head>
 
@@ -19,15 +16,18 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ranking <b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li><a href="#">appstore</a></li>
-                <li><a href="#">google play</a></li>
-                <li><a href="#">alexa</a></li>
+                <li><a href="{{ route('appstore') }}">appstore</a></li>
+                <li><a href="{{ route('googleplay') }}">google play</a></li>
+                <li><a href="{{ route('alexa') }}">alexa</a></li>
             </ul>
         </li>
     </ul>
 </nav>
 
+<div class="content">
 @yield('content')
+</div>
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </body>

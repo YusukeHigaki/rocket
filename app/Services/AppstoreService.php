@@ -1,16 +1,16 @@
 <?php
 namespace App\Services;
 
-use App\Iphone;
+use App\AppStore;
 
-class AppstoreService
+class AppStoreService implements PlatformServiceInterface
 {
     protected $url = 'https://itunes.apple.com/jp/rss/topfreeapplications/';
 
     /**
      * @param int $limit(maximum 200)
      */
-    public function getRanking($limit = 10)
+    public function getRanking($limit = 100)
     {
         $feed = file_get_contents("{$this->url}limit={$limit}/json");
         $dataList = json_decode($feed, true);
@@ -23,7 +23,7 @@ class AppstoreService
                 'icon' => $data['im:image'][0]['label'],
                 'url' => $data['link']['attributes']['href'],
             ];
-            $appList[] = new Iphone($value);
+            $appList[] = new AppStore($value);
             $i++;
         }
 
