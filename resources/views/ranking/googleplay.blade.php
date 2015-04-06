@@ -21,7 +21,9 @@
             <tr>
                 <td valign="middle">{{ $app->ranking }}</td>
                 <td>{!! HTML::image($app->icon) !!}</td>
+                <td>{!! HTML::link($app->url, $app->name) !!}</td>
             </tr>
         @endforeach
     </table>
+    <?= $appList->render(); ?>
 @stop

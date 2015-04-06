@@ -8,6 +8,7 @@
 </head>
 
 <body>
+<div class="container-fluid">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
         <a class="navbar-brand" href="#">Rocket</a>
@@ -27,7 +28,7 @@
 <div class="content">
 @yield('content')
 </div>
-
+</div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </body>

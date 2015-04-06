@@ -10,6 +10,7 @@
 </tr>
 
 <?php $date = null; ?>
+
 @foreach($appList as $app)
     @if($date != $app->created_at->format('Y-m-d'))
     <tr class="info">
@@ -25,4 +26,5 @@
     </tr>
 @endforeach
 </table>
+<?= $appList->render(); ?>
 @stop

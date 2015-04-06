@@ -1,7 +1,6 @@
 @extends('app')
 
 @section('content')
-
     <table class="table table-striped">
         <tr>
             <th>ランキング</th>
@@ -19,10 +18,11 @@
             @endif
 
             <tr>
-                <td valign="middle">{{ $web->ranking }}</td>
+                <td>{{ $web->ranking }}</td>
                 <td>{!! HTML::link($web->url, $web->url) !!}</td>
                 <td>{{ $web->description }}</td>
             </tr>
         @endforeach
     </table>
+    <?= $webList->render(); ?>
 @stop
